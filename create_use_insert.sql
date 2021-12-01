@@ -2,6 +2,7 @@ DROP DATABASE golf_database;
 CREATE DATABASE golf_database;
 
 use golf_database;
+
 create table if not exists `players`
 (
     `SSN`  varchar(255) NOT NULL,
@@ -58,7 +59,6 @@ create table if not exists `contestants`
 ) AUTO_INCREMENT = 7;
 
 
--- rain: table
 create table if not exists `rain`
 (
     `RainType`  varchar(255) NOT NULL,
