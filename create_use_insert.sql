@@ -48,15 +48,14 @@ create table if not exists `competition`
 
 create table if not exists `contestants`
 (
-    `ID`            int          NOT NULL AUTO_INCREMENT,
     `CompetionName` varchar(255) NOT NULL,
     `PlayerSSN`     varchar(255) NOT NULL,
-    PRIMARY KEY (`ID`),
+    PRIMARY KEY (`PlayerSSN`, `CompetionName`),
     KEY `PlayerSSN` (`PlayerSSN`),
     KEY `CompetionName` (`CompetionName`),
     FOREIGN KEY (`PlayerSSN`) REFERENCES `players` (`SSN`) ON DELETE CASCADE,
     FOREIGN KEY (`CompetionName`) REFERENCES `competition` (`Name`) ON DELETE CASCADE
-) AUTO_INCREMENT = 7;
+);
 
 
 create table if not exists `rain`
@@ -71,7 +70,7 @@ create table if not exists `weather`
     `RainTime`      datetime     NOT NULL,
     `CompetionName` varchar(255) NOT NULL,
     `RainType`      varchar(255) NOT NULL,
-    PRIMARY KEY (`RainTime`),
+    PRIMARY KEY (`CompetionName`, `RainType`),
     KEY `RainType` (`RainType`),
     KEY `CompetionName` (`CompetionName`),
     FOREIGN KEY (`RainType`) REFERENCES `rain` (`RainType`) ON DELETE CASCADE,
@@ -84,9 +83,9 @@ INSERT INTO golf_database.players (SSN, Name, Age) VALUES ('199604072386', 'Joha
 
 INSERT INTO golf_database.competition (Name, StartDate) VALUES ('Big Golf Cup Skövde', '2021-10-06 00:00:00');
 
-INSERT INTO golf_database.contestants (ID, CompetionName, PlayerSSN) VALUES (4, 'Big Golf Cup Skövde', '199604072386');
-INSERT INTO golf_database.contestants (ID, CompetionName, PlayerSSN) VALUES (5, 'Big Golf Cup Skövde', '198904032380');
-INSERT INTO golf_database.contestants (ID, CompetionName, PlayerSSN) VALUES (6, 'Big Golf Cup Skövde', '193903132397');
+INSERT INTO golf_database.contestants (CompetionName, PlayerSSN) VALUES ('Big Golf Cup Skövde', '199604072386');
+INSERT INTO golf_database.contestants (CompetionName, PlayerSSN) VALUES ('Big Golf Cup Skövde', '198904032380');
+INSERT INTO golf_database.contestants (CompetionName, PlayerSSN) VALUES ('Big Golf Cup Skövde', '193903132397');
 
 INSERT INTO golf_database.rain (RainType, WindForce) VALUES ('Hail', 10);
 INSERT INTO golf_database.weather (RainTime, CompetionName, RainType) VALUES ('2021-10-06 00:00:00', 'Big Golf Cup Skövde', 'Hail');
